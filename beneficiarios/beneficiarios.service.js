@@ -28,7 +28,7 @@ async function create(params) {
     if (year - userDate < 70) {
         throw 'Fecha de nacimiento invalida';
     }
-    
+
     // save user
     await db.Beneficiarios.create(params);
 }

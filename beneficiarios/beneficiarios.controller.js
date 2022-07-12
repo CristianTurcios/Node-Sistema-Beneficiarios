@@ -23,8 +23,8 @@ function registerSchema(req, res, next) {
         municipality: Joi.string().required(),
         village: Joi.string().required(),
         barrio: Joi.string().required(),
-        name: Joi.string(),
-        lastName: Joi.string(),
+        name: Joi.string().optional().allow(''),
+        lastName: Joi.string().optional().allow(''),
     });
     validateRequest(req, next, schema);
 }
@@ -56,8 +56,8 @@ function updateSchema(req, res, next) {
         municipality: Joi.string().required(),
         village: Joi.string().required(),
         barrio: Joi.string().required(),
-        name: Joi.string(),
-        lastName: Joi.string(),
+        name: Joi.string().optional().allow(''),
+        lastName: Joi.string().optional().allow(''),
     });
     validateRequest(req, next, schema);
 }
