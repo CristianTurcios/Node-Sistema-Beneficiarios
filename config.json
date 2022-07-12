@@ -1,0 +1,10 @@
+﻿{
+    "database": {
+        "host": "ec2-23-23-182-238.compute-1.amazonaws.com",
+        "port": 5432,
+        "user": "hvrhkelzzpbmek",
+        "password": "3bc5a9211a5df8f31434a4e2c52dde9592f0d74c3eebdf1a29171f4534008397",
+        "database": "ddpv6jo565itc1"
+    },
+    "secret": "1be7058d-ca26-4157-bbcd-853cc299ff99"
+}
