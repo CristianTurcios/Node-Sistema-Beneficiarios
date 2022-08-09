@@ -12,6 +12,7 @@ app.use(cors());
 // api routes
 app.use('/users', require('./users/users.controller'));
 app.use('/beneficiarios', require('./beneficiarios/beneficiarios.controller'));
+app.use('/discapacitados', require('./discapacitados/discapacitados.controller'));
 
 // global error handler
 app.use(errorHandler);

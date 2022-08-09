@@ -3,7 +3,7 @@ const router = express.Router();
 const Joi = require('joi');
 const validateRequest = require('_middleware/validate-request');
 const authorize = require('_middleware/authorize')
-const beneficiariosService = require('./beneficiarios.service');
+const discapacitadosService = require('./discapacitados.service');
 
 // routes
 router.post('/', authorize(), registerSchema, register);
@@ -25,24 +25,25 @@ function registerSchema(req, res, next) {
         barrio: Joi.string().required(),
         name: Joi.string().optional().allow(''),
         lastName: Joi.string().optional().allow(''),
+        discapacidad: Joi.string().required(),
     });
     validateRequest(req, next, schema);
 }
 
 function register(req, res, next) {
-    beneficiariosService.create(req.body)
+    discapacitadosService.create(req.body)
         .then(() => res.json({ message: 'Registration successful' }))
         .catch(next);
 }
 
 function getAll(req, res, next) {
-    beneficiariosService.getAll()
+    discapacitadosService.getAll()
         .then(users => res.json(users))
         .catch(next);
 }
 
 function getById(req, res, next) {
-    beneficiariosService.getById(req.params.id)
+    discapacitadosService.getById(req.params.id)
         .then(user => res.json(user))
         .catch(next);
 }
@@ -58,18 +59,19 @@ function updateSchema(req, res, next) {
         barrio: Joi.string().required(),
         name: Joi.string().optional().allow(''),
         lastName: Joi.string().optional().allow(''),
+        discapacidad: Joi.string().required(),
     });
     validateRequest(req, next, schema);
 }
 
 function update(req, res, next) {
-    beneficiariosService.update(req.params.id, req.body)
+    discapacitadosService.update(req.params.id, req.body)
         .then(user => res.json(user))
         .catch(next);
 }
 
 function _delete(req, res, next) {
-    beneficiariosService.delete(req.params.id)
-        .then(() => res.json({ message: 'Registro borrado con exito' }))
+    discapacitadosService.delete(req.params.id)
+        .then(() => res.json({ message: 'Registro Borrado con exito' }))
         .catch(next);
 }
