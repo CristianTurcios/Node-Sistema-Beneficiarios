@@ -14,6 +14,10 @@ function model(sequelize) {
         name: { type: DataTypes.STRING, allowNull: true },
         lastName: { type: DataTypes.STRING, allowNull: true },
         discapacidad: { type: DataTypes.STRING, allowNull: false },
+        identidadPersonInCharge: { type: DataTypes.STRING, allowNull: true },
+        fullNamePersonInCharge:{ type: DataTypes.STRING, allowNull: true },
+        phonePersonInCharge:  { type: DataTypes.STRING, allowNull: true },
+        bornDatePersonInCharge: { type: DataTypes.STRING, allowNull: true },
     };
 
     const options = {

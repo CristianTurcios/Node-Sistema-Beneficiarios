@@ -26,6 +26,10 @@ function registerSchema(req, res, next) {
         name: Joi.string().optional().allow(''),
         lastName: Joi.string().optional().allow(''),
         discapacidad: Joi.string().required(),
+        identidadPersonInCharge: Joi.string().optional().min(13),
+        fullNamePersonInCharge: Joi.string().optional().allow(''),
+        phonePersonInCharge: Joi.string().optional().min(8),
+        bornDatePersonInCharge: Joi.string().optional(),
     });
     validateRequest(req, next, schema);
 }
@@ -60,6 +64,10 @@ function updateSchema(req, res, next) {
         name: Joi.string().optional().allow(''),
         lastName: Joi.string().optional().allow(''),
         discapacidad: Joi.string().required(),
+        identidadPersonInCharge: Joi.string().optional().min(13).required(),
+        fullNamePersonInCharge: Joi.string().optional().allow(''),
+        phonePersonInCharge: Joi.string().optional().min(8).required(),
+        bornDatePersonInCharge: Joi.string().optional(),
     });
     validateRequest(req, next, schema);
 }

@@ -22,11 +22,15 @@ async function create(params) {
         throw 'Identidad "' + params.identidad + '" ya existe en el sistema';
     }
 
+    // Actualmente los discapacitados van tener libre el limite de edad
     const year = new Date().getFullYear();
-    const userDate = new Date(params.bornDate).getFullYear()
 
-    if (year - userDate < 18) {
-        throw 'Fecha de nacimiento invalida';
+    if(params?.bornDatePersonInCharge) {
+        const bornDatePersonInCharge = new Date(params.bornDatePersonInCharge).getFullYear();
+        
+        if (year - bornDatePersonInCharge < 18) {
+            throw 'Fecha de nacimiento invalida';
+        }
     }
 
     // save user
