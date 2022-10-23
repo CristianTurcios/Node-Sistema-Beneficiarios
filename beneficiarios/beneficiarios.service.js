@@ -25,7 +25,7 @@ async function create(params) {
     const year = new Date().getFullYear();
     const userDate = new Date(params.bornDate).getFullYear()
 
-    if (year - userDate < 70) {
+    if (year - userDate < 65) {
         throw 'Fecha de nacimiento invalida';
     }
 
