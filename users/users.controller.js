@@ -13,6 +13,7 @@ router.get('/current', authorize(), getCurrent);
 router.get('/:id', authorize(), getById);
 router.put('/:id', authorize(), updateSchema, update);
 router.delete('/:id', authorize(), _delete);
+router.put('/:id/change-password', authorize(), changePasswordSchema, changePassword);
 
 module.exports = router;
 
@@ -81,5 +82,20 @@ function update(req, res, next) {
 function _delete(req, res, next) {
     userService.delete(req.params.id)
         .then(() => res.json({ message: 'User deleted successfully' }))
+        .catch(next);
+}
+
+function changePasswordSchema(req, res, next) {
+    const schema = Joi.object({
+        oldPassword: Joi.string().min(6).required(),
+        newPassword: Joi.string().min(6).required()
+    });
+    validateRequest(req, next, schema);
+}
+
+function changePassword(req, res, next) {
+    const { oldPassword, newPassword } = req.body;
+    userService.changePassword(req.params.id, newPassword, oldPassword)
+        .then(() => res.json({ message: 'Password changed successfully' }))
         .catch(next);
 }

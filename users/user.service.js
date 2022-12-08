@@ -9,7 +9,8 @@ module.exports = {
     getById,
     create,
     update,
-    delete: _delete
+    delete: _delete,
+    changePassword
 };
 
 async function authenticate({ email, password }) {
@@ -75,11 +76,27 @@ async function _delete(id) {
     await user.destroy();
 }
 
-// helper functions
+async function changePassword(id, newPassword, oldPassword) {
+    if(newPassword === oldPassword) throw 'Password are the same';
 
+    const user = await db.User.scope('withHash').findByPk(id);
+
+    if (!user || !(await bcrypt.compare(oldPassword, user.hash)))
+        throw 'Password mismatch';
+
+    const data = {
+        hash: await bcrypt.hash(newPassword, 10)
+    };
+
+    // copy params to user and save
+    Object.assign(user, data);
+    await user.save();
+}
+
+// helper functions
 async function getUser(id) {
     const user = await db.User.findByPk(id);
-    if (!user) throw 'Useario no encontrado';
+    if (!user) throw 'Usuario no encontrado';
     return user;
 }
 
