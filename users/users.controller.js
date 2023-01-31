@@ -48,7 +48,8 @@ function register(req, res, next) {
 }
 
 function getAll(req, res, next) {
-    userService.getAll()
+    const { email, page, size } = req.query
+    userService.getAll(email, page, size)
         .then(users => res.json(users))
         .catch(next);
 }

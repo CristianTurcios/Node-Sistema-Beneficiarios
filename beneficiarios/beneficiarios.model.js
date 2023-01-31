@@ -13,6 +13,7 @@ function model(sequelize) {
         barrio: { type: DataTypes.STRING, allowNull: false },
         name: { type: DataTypes.STRING, allowNull: true },
         lastName: { type: DataTypes.STRING, allowNull: true },
+        sex: { type: DataTypes.STRING, allowNull: true },
     };
 
     const options = {

@@ -2,6 +2,8 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const db = require('_helpers/db');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 module.exports = {
     authenticate,
@@ -12,6 +14,23 @@ module.exports = {
     delete: _delete,
     changePassword
 };
+
+
+const getPagination = (page, size) => {
+  const limit = size ? +size : 10;
+  const offset = page ? page * limit : 0;
+
+  return { limit, offset };
+};
+
+const getPagingData = (data, page, limit) => {
+  const { count: totalItems, rows: users } = data;
+  const currentPage = page ? +page : 0;
+  const totalPages = Math.ceil(totalItems / limit) - 1;
+
+  return { totalItems, users, totalPages, currentPage };
+};
+
 
 async function authenticate({ email, password }) {
     const user = await db.User.scope('withHash').findOne({ where: { email } });
@@ -27,8 +46,18 @@ async function authenticate({ email, password }) {
     return { ...omitHash(user.get()), token };
 }
 
-async function getAll() {
-    return await db.User.findAll();
+async function getAll(email, page, size) {
+    const { limit, offset } = getPagination(page, size);
+    const condition = email ? { email: { [Op.like]: `%${email}%` } } : null;
+
+    const data =  await db.User.findAndCountAll(
+        {
+            where: condition,
+            limit,
+            offset
+        }
+    );
+    return getPagingData(data, page, limit);
 }
 
 async function getById(id) {

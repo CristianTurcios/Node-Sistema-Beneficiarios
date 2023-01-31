@@ -18,6 +18,7 @@ function model(sequelize) {
         fullNamePersonInCharge:{ type: DataTypes.STRING, allowNull: true },
         phonePersonInCharge:  { type: DataTypes.STRING, allowNull: true },
         bornDatePersonInCharge: { type: DataTypes.STRING, allowNull: true },
+        sex: { type: DataTypes.STRING, allowNull: true },
     };
 
     const options = {

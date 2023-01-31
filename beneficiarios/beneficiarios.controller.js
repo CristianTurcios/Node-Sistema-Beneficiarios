@@ -25,6 +25,7 @@ function registerSchema(req, res, next) {
         barrio: Joi.string().required(),
         name: Joi.string().optional().allow(''),
         lastName: Joi.string().optional().allow(''),
+        sex: Joi.string().optional().allow(''),
     });
     validateRequest(req, next, schema);
 }
@@ -58,6 +59,7 @@ function updateSchema(req, res, next) {
         barrio: Joi.string().required(),
         name: Joi.string().optional().allow(''),
         lastName: Joi.string().optional().allow(''),
+        sex: Joi.string().optional().allow(''),
     });
     validateRequest(req, next, schema);
 }

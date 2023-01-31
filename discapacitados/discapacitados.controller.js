@@ -30,6 +30,7 @@ function registerSchema(req, res, next) {
         fullNamePersonInCharge: Joi.string().optional().allow('').allow(null),
         phonePersonInCharge: Joi.string().optional().min(8).allow('').allow(null),
         bornDatePersonInCharge: Joi.string().optional().allow('').allow(null),
+        sex: Joi.string().optional().allow('').allow(null),
     });
     validateRequest(req, next, schema);
 }
@@ -68,6 +69,7 @@ function updateSchema(req, res, next) {
         fullNamePersonInCharge: Joi.string().optional().allow('').allow(null),
         phonePersonInCharge: Joi.string().optional().min(8).allow('').allow(null),
         bornDatePersonInCharge: Joi.string().optional().allow('').allow(null),
+        sex: Joi.string().optional().allow('').allow(null),
     });
     validateRequest(req, next, schema);
 }
