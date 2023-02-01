@@ -31,12 +31,14 @@ const getPagingData = (data, page, limit) => {
   return { totalItems, users, totalPages, currentPage };
 };
 
-
 async function authenticate({ email, password }) {
     const user = await db.User.scope('withHash').findOne({ where: { email } });
 
     if (!user || !(await bcrypt.compare(password, user.hash)))
         throw 'Email or password is incorrect';
+
+    if(!user.isActive)
+        throw 'User inactive';
 
     // authentication successful
     const token = jwt.sign({ 

@@ -7,7 +7,9 @@ function model(sequelize) {
         firstName: { type: DataTypes.STRING, allowNull: false },
         lastName: { type: DataTypes.STRING, allowNull: false },
         email: { type: DataTypes.STRING, allowNull: false },
-        hash: { type: DataTypes.STRING, allowNull: false }
+        hash: { type: DataTypes.STRING, allowNull: false },
+        isAdmin: { type: DataTypes.BOOLEAN, allowNull: false },
+        isActive: { type: DataTypes.BOOLEAN, allowNull: false },
     };
 
     const options = {
