@@ -32,6 +32,8 @@ async function initialize() {
     db.User = require('../users/user.model')(sequelize);
     db.Beneficiarios = require('../beneficiarios/beneficiarios.model')(sequelize);
     db.Discapacitados = require('../discapacitados/discapacitados.model')(sequelize);
+    db.Becas = require('../becas/becas.model')(sequelize);
+
 
     // sync all models with database
     await sequelize.sync();

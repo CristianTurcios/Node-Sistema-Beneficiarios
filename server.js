@@ -13,6 +13,7 @@ app.use(cors());
 app.use('/users', require('./users/users.controller'));
 app.use('/beneficiarios', require('./beneficiarios/beneficiarios.controller'));
 app.use('/discapacitados', require('./discapacitados/discapacitados.controller'));
+app.use('/becas', require('./becas/becas.controller'));
 
 // global error handler
 app.use(errorHandler);
