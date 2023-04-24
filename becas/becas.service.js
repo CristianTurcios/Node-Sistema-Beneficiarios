@@ -22,6 +22,10 @@ async function create(params) {
         throw 'Identidad "' + params.identidad + '" ya existe en el sistema';
     }
 
+    if (params.grade < 75) {
+        throw 'Indice Academico debe ser igual o mayor a 75%';
+    }
+
     // save user
     await db.Becas.create(params);
 }
@@ -33,6 +37,10 @@ async function update(id, params) {
     const identidadChanged = params.identidad && becas.identidad !== params.identidad;
     if (identidadChanged && await db.Becas.findOne({ where: { identidad: params.identidad } })) {
         throw 'Identidad "' + params.identidad + '" ya existe en el sistema';
+    }
+
+    if (params.grade < 75) {
+        throw 'Indice Academico debe ser igual o mayor a 75%';
     }
 
     // copy params to user and save

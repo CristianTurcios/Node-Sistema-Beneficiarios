@@ -40,14 +40,13 @@ function registerSchema(req, res, next) {
         academicLevel: Joi.string().required(),
         grade: Joi.number().required(),
         // *** Fathers or tutors information ***
-        motherName: Joi.string().optional().allow(''),
-        fatherName: Joi.string().optional().allow(''),
+        motherOrFatherName: Joi.string().optional().allow(''),
+        motherOrFatherLastName: Joi.string().optional().allow(''),
         numberOfChildrenFathers: Joi.number().optional(),
-        educationalLevelMother: Joi.string().optional().allow(''),
-        educationalLevelFather: Joi.string().optional().allow(''),
+        educationalLevelMotherOrFather: Joi.string().optional().allow(''),
+        identidadMotherOrFather: Joi.string().min(13).optional().allow(''),
         fathersAddress: Joi.string().optional().allow(''),
-        motherWork: Joi.string().optional().allow(''),
-        fatherWork: Joi.string().optional().allow(''),
+        motherOrFatherWork: Joi.string().optional().allow(''),
         monthlyIncome: Joi.string().optional(),
         fathersPhone: Joi.string().optional().allow(''),
         observation: Joi.string().optional().allow(''),
@@ -63,13 +62,13 @@ function register(req, res, next) {
 
 function getAll(req, res, next) {
     becasService.getAll()
-        .then(users => res.json(users))
+        .then(data => res.json(data))
         .catch(next);
 }
 
 function getById(req, res, next) {
     becasService.getById(req.params.id)
-        .then(user => res.json(user))
+        .then(data => res.json(data))
         .catch(next);
 }
 
@@ -99,14 +98,13 @@ function updateSchema(req, res, next) {
         academicLevel: Joi.string().required(),
         grade: Joi.number().required(),
         // *** Fathers or tutors information ***
-        motherName: Joi.string().optional().allow(''),
-        fatherName: Joi.string().optional().allow(''),
+        motherOrFatherName: Joi.string().optional().allow(''),
+        motherOrFatherLastName: Joi.string().optional().allow(''),
         numberOfChildrenFathers: Joi.number().optional(),
-        educationalLevelMother: Joi.string().optional().allow(''),
-        educationalLevelFather: Joi.string().optional().allow(''),
+        educationalLevelMotherOrFather: Joi.string().optional().allow(''),
+        identidadMotherOrFather: Joi.string().min(13).optional().allow(''),
         fathersAddress: Joi.string().optional().allow(''),
-        motherWork: Joi.string().optional().allow(''),
-        fatherWork: Joi.string().optional().allow(''),
+        motherOrFatherWork: Joi.string().optional().allow(''),
         monthlyIncome: Joi.string().optional(),
         fathersPhone: Joi.string().optional().allow(''),
         observation: Joi.string().optional().allow(''),
