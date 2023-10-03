@@ -61,7 +61,8 @@ function register(req, res, next) {
 }
 
 function getAll(req, res, next) {
-    becasService.getAll()
+    const { id, page, size } = req.query;
+    becasService.getAll(id, page, size)
         .then(data => res.json(data))
         .catch(next);
 }

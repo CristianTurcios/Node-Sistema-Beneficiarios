@@ -1,4 +1,7 @@
 const db = require('_helpers/db');
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
+const { getPagination, getPagingData } = require("_helpers/pagination");
 
 module.exports = {
     getAll,
@@ -8,8 +11,18 @@ module.exports = {
     delete: _delete
 };
 
-async function getAll() {
-    return await db.Becas.findAll();
+async function getAll(id, page, size) {
+  const { limit, offset } = getPagination(page, size);
+
+  const condition = id ? { identidad: { [Op.like]: `%${id}%` } } : null;
+  
+  const data = await db.Becas.findAndCountAll({
+    where: condition,
+    limit,
+    offset,
+  });
+
+  return getPagingData(data, page, limit);
 }
 
 async function getById(id) {

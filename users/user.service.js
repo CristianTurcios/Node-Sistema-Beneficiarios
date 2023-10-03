@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const db = require('_helpers/db');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
+const { getPagination, getPagingData } = require('_helpers/pagination');
 
 module.exports = {
     authenticate,
@@ -13,22 +14,6 @@ module.exports = {
     update,
     delete: _delete,
     changePassword
-};
-
-
-const getPagination = (page, size) => {
-  const limit = size ? +size : 10;
-  const offset = page ? page * limit : 0;
-
-  return { limit, offset };
-};
-
-const getPagingData = (data, page, limit) => {
-  const { count: totalItems, rows: users } = data;
-  const currentPage = page ? +page : 0;
-  const totalPages = Math.ceil(totalItems / limit) - 1;
-
-  return { totalItems, users, totalPages, currentPage };
 };
 
 async function authenticate({ email, password }) {

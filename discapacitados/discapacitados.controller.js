@@ -42,7 +42,8 @@ function register(req, res, next) {
 }
 
 function getAll(req, res, next) {
-    discapacitadosService.getAll()
+    const { id, page, size } = req.query;
+    discapacitadosService.getAll(id, page, size)
         .then(users => res.json(users))
         .catch(next);
 }
