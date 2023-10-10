@@ -4,7 +4,6 @@ const Joi = require("joi");
 const validateRequest = require("_middleware/validate-request");
 const authorize = require("_middleware/authorize");
 const becasService = require("./becas.service");
-var { Parser } = require("json2csv");
 
 // routes
 router.post("/", authorize(), registerSchema, register);
