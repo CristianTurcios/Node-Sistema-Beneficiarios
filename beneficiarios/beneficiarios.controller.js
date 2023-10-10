@@ -8,6 +8,7 @@ const beneficiariosService = require('./beneficiarios.service');
 // routes
 router.post('/', authorize(), registerSchema, register);
 router.get('/', authorize(), getAll);
+router.get("/report", authorize(), getReport);
 router.get('/:id', authorize(), getById);
 router.put('/:id', authorize(), updateSchema, update);
 router.delete('/:id', authorize(), _delete);
@@ -41,6 +42,13 @@ function getAll(req, res, next) {
     beneficiariosService.getAll(id, page, size)
         .then(users => res.json(users))
         .catch(next);
+}
+
+function getReport(req, res, next) {
+  beneficiariosService
+    .getReport()
+    .then((data) => res.json(data))
+    .catch(next);
 }
 
 function getById(req, res, next) {

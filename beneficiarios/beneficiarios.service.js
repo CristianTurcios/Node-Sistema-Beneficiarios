@@ -4,11 +4,12 @@ const Op = Sequelize.Op;
 const { getPagination, getPagingData } = require("_helpers/pagination");
 
 module.exports = {
-    getAll,
-    getById,
-    create,
-    update,
-    delete: _delete
+  getAll,
+  getReport,
+  getById,
+  create,
+  update,
+  delete: _delete,
 };
 
 async function getAll(id, page, size) {
@@ -23,6 +24,10 @@ async function getAll(id, page, size) {
   });
 
   return getPagingData(data, page, limit);
+}
+
+async function getReport() {
+  return await db.Beneficiarios.findAll();
 }
 
 async function getById(id) {

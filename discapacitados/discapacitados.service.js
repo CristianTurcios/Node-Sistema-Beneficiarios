@@ -5,6 +5,7 @@ const { getPagination, getPagingData } = require("_helpers/pagination");
 
 module.exports = {
     getAll,
+    getReport,
     getById,
     create,
     update,
@@ -23,6 +24,10 @@ async function getAll(id, page, size) {
   });
 
   return getPagingData(data, page, limit);
+}
+
+async function getReport() {
+  return await db.Discapacitados.findAll();
 }
 
 async function getById(id) {
